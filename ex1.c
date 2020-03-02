@@ -31,7 +31,7 @@ int main() {
 			int sum = 0;
 			for (int k = 0; k < m; k++) {
 				// sum += A[k][i] * B[j][k];
-                sum += AA[i + k*m] * BB[k + j*m]
+                sum += AA[i + k*m] * BB[k + j*m];
 			}
 
 			CC[i + j*m] = sum;
