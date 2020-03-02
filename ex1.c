@@ -40,7 +40,7 @@ int main() {
 
 	for (int i = 0; i < m; i++) {
 		for (int j = 0; j < m; j++) {
-			printf("%d", CC[i + j*m]);
+			printf("%d ", CC[i + j*m]);
 		}
 		printf("\n");
 	}
