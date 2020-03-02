@@ -24,7 +24,7 @@ main:
 forOA: #change from forrA
   beqz	$9, forIA  
   addi	$8, $8, 1
-  beq	$8, $7, reset1
+  beq	$8, $7, reset
   add	$9, $0, $0		#set c to 0
   j	forIA
   
@@ -40,7 +40,7 @@ forIA:
   addi	$9, $9, 1
   j	forIA
   
-reset1:
+reset:
   add 	$8,$0,$0		# r to 0
   add 	$9,$0,$0		# c to 0
   j	forOB
@@ -48,7 +48,7 @@ reset1:
 forOB: 
   beqz	$9, forIB 
   addi	$8, $8, 1
-  beq	$8, $7, reset2 
+  beq	$8, $7, reset1 
   add	$9, $0, $0		#set c to 0
   j	forIB
  
@@ -64,30 +64,30 @@ forIB:
   addi	$9, $9, 1
   j	forIB
 
-reset2:
+reset1:
   add 	$8,$0,$0		# r to 0
   add 	$9,$0,$0		# c to 0
-  j	loop1
+  j	loop
 
-loop1:
-  beqz	$9, loop2
+loop:
+  beqz	$9, loop1
   addi	$8, $8, 1
-  beq	$8, $7, reset3
+  beq	$8, $7, reset2
   add	$9, $0, $0		#set 9 to zero
+  add	$10, $0, $0		#set sum to zero
+  add	$1, $0, $0		#set z to zero
+  j	loop1
+  
+loop1:
+  beqz  $1, loop2
+  addi	$9, $9, 1
+  beq	$9, $7, loop
   add	$10, $0, $0		#set sum to zero
   add	$1, $0, $0		#set z to zero
   j	loop2
   
 loop2:
-  beqz  $1, loop3
-  addi	$9, $9, 1
-  beq	$9, $7, loop1
-  add	$10, $0, $0		#set sum to zero
-  add	$1, $0, $0		#set z to zero
-  j	loop3
-  
-loop3:
-  beq	$1, $7, loop2		
+  beq	$1, $7, loop1		
   mult	$7, $8
   mflo 	$11
   add	$11, $11, $1
@@ -107,9 +107,9 @@ loop3:
   sll	$12, $11, 2
   sw	$10, CC($12)
   addi	$1, $1, 1
-  j	loop3
+  j	loop2
   
- reset3:
+ reset2:
   add 	$8,$0,$0		# r to 0
   add 	$9,$0,$0		# c to 0
   j	printr	
