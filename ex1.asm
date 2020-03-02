@@ -21,15 +21,15 @@ main:
   
   add	$10, $0, $0		#$10 is going to be the sum register
   
-forOuterA:
-  beqz	$9, forInnerA 
+forOA: #change from forrA
+  beqz	$9, forIA  
   addi	$8, $8, 1
   beq	$8, $7, reset1
   add	$9, $0, $0		#set c to 0
-  j	forInnerA
+  j	forIA
   
-forInnerA:
-  beq	$9, $7, forOuterA
+forIA:
+  beq	$9, $7, forOA
   addi	$v0, $0, 5		# system call 5 is for reading an integer
   syscall 			# integer value read is in $v0
   mult	$7, $8			#multiply m * r
@@ -38,22 +38,22 @@ forInnerA:
   sll	$4, $4, 2		#offset
   sw	$v0, AA($4)		#store
   addi	$9, $9, 1
-  j	forInnerA
+  j	forIA
   
 reset1:
   add 	$8,$0,$0		# r to 0
   add 	$9,$0,$0		# c to 0
-  j	forOuterB
+  j	forOB
   
-forOuterB: 
-  beqz	$9, forInnerB
+forOB: 
+  beqz	$9, forIB 
   addi	$8, $8, 1
   beq	$8, $7, reset2 
   add	$9, $0, $0		#set c to 0
-  j	forInnerB
+  j	forIB
  
-forInnerB:
-  beq	$9, $7, forrB
+forIB:
+  beq	$9, $7, forOB
   addi	$v0, $0, 5		# system call 5 is for reading an integer
   syscall 			# integer value read is in $v0
   mult	$7, $8			#multiply m * r
@@ -62,7 +62,7 @@ forInnerB:
   sll	$4, $4, 2		#offset
   sw	$v0, BB($4)		#store
   addi	$9, $9, 1
-  j	forInnerB
+  j	forIB
 
 reset2:
   add 	$8,$0,$0		# r to 0
