@@ -42,6 +42,6 @@ int main() {
 		for (int j = 0; j < m; j++) {
 			printf("%6d", CC[i + j*m]);
 		}
-		printf("\n");
+		// printf("\n");
 	}
 }
