@@ -21,11 +21,11 @@ main:
   
   add	$10, $0, $0		#$10 is going to be the sum register
   
-forOA: #change from forrA
+forOA:
   beqz	$9, forIA  
   addi	$8, $8, 1
   beq	$8, $7, reset
-  add	$9, $0, $0		#set c to 0
+  add	$9, $0, $0		
   j	forIA
   
 forIA:
@@ -49,24 +49,24 @@ forOB:
   beqz	$9, forIB 
   addi	$8, $8, 1
   beq	$8, $7, reset1 
-  add	$9, $0, $0		#set c to 0
+  add	$9, $0, $0	
   j	forIB
  
 forIB:
   beq	$9, $7, forOB
-  addi	$v0, $0, 5		# system call 5 is for reading an integer
-  syscall 			# integer value read is in $v0
-  mult	$7, $8			#multiply m * r
+  addi	$v0, $0, 5	
+  syscall 			
+  mult	$7, $8			
   mflo	$4
-  add	$4, $4, $9		#add c to M *r
-  sll	$4, $4, 2		#offset
-  sw	$v0, BB($4)		#store
+  add	$4, $4, $9		
+  sll	$4, $4, 2		
+  sw	$v0, BB($4)		
   addi	$9, $9, 1
   j	forIB
 
 reset1:
-  add 	$8,$0,$0		# r to 0
-  add 	$9,$0,$0		# c to 0
+  add 	$8,$0,$0
+  add 	$9,$0,$0		
   j	loop
 
 loop:
@@ -82,8 +82,8 @@ loop1:
   beqz  $1, loop2
   addi	$9, $9, 1
   beq	$9, $7, loop
-  add	$10, $0, $0		#set sum to zero
-  add	$1, $0, $0		#set z to zero
+  add	$10, $0, $0	
+  add	$1, $0, $0		
   j	loop2
   
 loop2:
@@ -110,8 +110,8 @@ loop2:
   j	loop2
   
  reset2:
-  add 	$8,$0,$0		# r to 0
-  add 	$9,$0,$0		# c to 0
+  add 	$8,$0,$0		
+  add 	$9,$0,$0	
   j	printr	
   
 printr:
@@ -122,7 +122,7 @@ printr:
   la 	$a0, newline 			# address of areaIs string is in $a0
   syscall           			# print the string
   
-  add	$9, $0, $0		#set c to 0
+  add	$9, $0, $0	
   j	printc
   
 printc:
